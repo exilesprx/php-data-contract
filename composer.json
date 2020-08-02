@@ -4,7 +4,7 @@
   },
   "require": {
     "illuminate/support": "^7.22",
-    "ext-json": "*",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
