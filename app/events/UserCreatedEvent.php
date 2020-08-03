@@ -4,7 +4,7 @@ namespace App\Events;
 
 use Illuminate\Support\Arr;
 
-class UserEvent extends Event
+class UserCreatedEvent extends Event
 {
     public static function fromArray(array $data) : self
     {

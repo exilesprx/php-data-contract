@@ -2,7 +2,7 @@
 
 namespace App\Cache;
 
-use App\Events\UserEvent;
+use App\Events\UserCreatedEvent;
 use Illuminate\Support\Arr;
 
 class Cache
@@ -15,7 +15,7 @@ class Cache
     protected static function getDefinitions() : array
     {
         return [
-            UserEvent::getEventName() => [
+            UserCreatedEvent::getEventName() => [
                 "props" => [
                     "name" => [
                         "required" => true,

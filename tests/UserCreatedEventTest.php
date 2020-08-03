@@ -3,17 +3,17 @@
 namespace Tests;
 
 use App\Cache\Cache;
-use App\Events\UserEvent;
+use App\Events\UserCreatedEvent;
 use Illuminate\Support\Arr;
 use PHPUnit\Framework\ExpectationFailedException;
 use PHPUnit\Framework\TestCase;
 
-class UserEventTest extends TestCase
+class UserCreatedEventTest extends TestCase
 {
     /** @test */
     public function it_expects_cache_to_have_definitions()
     {
-        $cache = Cache::get(UserEvent::getEventName());
+        $cache = Cache::get(UserCreatedEvent::getEventName());
 
         $this->assertIsArray($cache);
     }
@@ -21,7 +21,7 @@ class UserEventTest extends TestCase
     /** @test */
     public function it_expects_user_event_to_pass()
     {
-        UserEvent::fromArray(
+        UserCreatedEvent::fromArray(
             [
                 'name' => "Tester",
                 'email' => "test@test.com",
@@ -35,7 +35,7 @@ class UserEventTest extends TestCase
     {
         $this->expectException(ExpectationFailedException::class);
 
-        UserEvent::fromArray(
+        UserCreatedEvent::fromArray(
             [
                 'name' => "",
                 'email' => "test@test.com",
@@ -54,7 +54,7 @@ class UserEventTest extends TestCase
             'country' => "CA"
         ];
 
-        $event = UserEvent::fromArray($data);
+        $event = UserCreatedEvent::fromArray($data);
 
         $this->assertEquals(Arr::get($data, 'name'), $event->getName());
 
@@ -68,9 +68,9 @@ class UserEventTest extends TestCase
     /** @test */
     public function it_expects_country_to_be_the_default()
     {
-        $cache = Cache::get(UserEvent::getEventName());
+        $cache = Cache::get(UserCreatedEvent::getEventName());
 
-        $event = UserEvent::fromArray(
+        $event = UserCreatedEvent::fromArray(
             [
                 'name' => "Tester",
                 'email' => "test@test.com",
