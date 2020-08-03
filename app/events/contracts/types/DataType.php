@@ -20,7 +20,18 @@ abstract class DataType implements TypeContract
 
     public function assertValueConforms($data): void
     {
-        if (Arr::get($this->rules, 'required', false)) {
+        $isRequired = $this->isRequired();
+        $default = $this->getDefault();
+
+        /**
+         * If a data item is not required and there is no default
+         * then just let the event define the default.
+         */
+        if ( ! $isRequired && ! $default) {
+            return;
+        }
+
+        if ($isRequired) {
             $this->meetsRequired($data);
         }
 
@@ -51,4 +62,9 @@ abstract class DataType implements TypeContract
     }
 
     protected abstract function meetsType($data) : void;
+
+    private function isRequired() : bool
+    {
+        return Arr::get($this->rules, 'required', false);
+    }
 }

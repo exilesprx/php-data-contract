@@ -37,6 +37,11 @@ class Cache
                         "length" => 2,
                         "type" => "string",
                         "default" => "USA"
+                    ],
+                    "company" => [
+                        "required" => false,
+                        "length" => 2,
+                        "type" => "string"
                     ]
                 ]
             ]

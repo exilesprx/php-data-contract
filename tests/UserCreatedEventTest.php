@@ -22,11 +22,7 @@ class UserCreatedEventTest extends TestCase
     public function it_expects_user_event_to_pass()
     {
         UserCreatedEvent::fromArray(
-            [
-                'name' => "Tester",
-                'email' => "test@test.com",
-                'password' => "1aB%tuperT2$#"
-            ]
+            $this->getTestData()
         );
     }
 
@@ -36,23 +32,19 @@ class UserCreatedEventTest extends TestCase
         $this->expectException(ExpectationFailedException::class);
 
         UserCreatedEvent::fromArray(
-            [
-                'name' => "",
-                'email' => "test@test.com",
-                'password' => "1aB%tuperT2$#"
-            ]
+            $this->getTestData(['name'])
         );
     }
 
     /** @test */
     public function it_expects_all_properties_to_be_set()
     {
-        $data = [
-            'name' => "Tester",
-            'email' => "test@test.com",
-            'password' => "1aB%tuperT2$#",
-            'country' => "CA"
-        ];
+        $data = array_merge(
+            $this->getTestData(),
+            [
+                'country' => "CA"
+            ]
+        );
 
         $event = UserCreatedEvent::fromArray($data);
 
@@ -71,13 +63,54 @@ class UserCreatedEventTest extends TestCase
         $cache = Cache::get(UserCreatedEvent::getEventName());
 
         $event = UserCreatedEvent::fromArray(
-            [
-                'name' => "Tester",
-                'email' => "test@test.com",
-                'password' => "1aB%tuperT2$#",
-            ]
+            $this->getTestData()
         );
 
         $this->assertEquals(Arr::get($cache, 'props.country.default'), $event->getCountry());
+    }
+
+    /** @test */
+    public function it_expects_company_to_be_null()
+    {
+        $event = UserCreatedEvent::fromArray(
+            $this->getTestData()
+        );
+
+        $this->assertNull($event->getCompany());
+    }
+
+    /** @test */
+    public function it_expects_company_to_be_set()
+    {
+        $data = array_merge(
+            $this->getTestData(),
+            [
+                "company" => "Test Inc."
+            ]
+        );
+
+        $event = UserCreatedEvent::fromArray($data);
+
+        $this->assertEquals(Arr::get($data, "company"), $event->getCompany());
+    }
+
+    private function getTestData(array $itemsToRemove = []) : array
+    {
+        $data = [
+            'name' => "Tester",
+            'email' => "test@test.com",
+            'password' => "1aB%tuperT2$#",
+        ];
+
+        return array_filter(
+            $data,
+            function($item, $key) use ($itemsToRemove) {
+                if (! in_array($key, $itemsToRemove)) {
+                    return true;
+                }
+                return false;
+            },
+            ARRAY_FILTER_USE_BOTH
+        );
     }
 }

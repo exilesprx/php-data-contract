@@ -30,4 +30,9 @@ class UserCreatedEvent extends Event
     {
         return Arr::get($this->data, 'country');
     }
+
+    public function getCompany() : ?string
+    {
+        return Arr::get($this->data, 'company', null);
+    }
 }
