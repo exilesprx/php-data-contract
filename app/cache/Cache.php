@@ -14,37 +14,13 @@ class Cache
 
     protected static function getDefinitions() : array
     {
+        /**
+         * Find a dynamic way to iterate all classes that implement the
+         * EventDataContract interface and build the definitions array
+         * from that.
+         */
         return [
-            UserCreatedEvent::getEventName() => [
-                "props" => [
-                    "name" => [
-                        "required" => true,
-                        "length" => 3,
-                        "type" => "string"
-                    ],
-                    "email" => [
-                        "required" => true,
-                        "length" => 10,
-                        "type" => "email"
-                    ],
-                    "password" => [
-                        "required" => true,
-                        "length" => 8,
-                        "type" => "password"
-                    ],
-                    "country" => [
-                        "required" => false,
-                        "length" => 2,
-                        "type" => "string",
-                        "default" => "USA"
-                    ],
-                    "company" => [
-                        "required" => false,
-                        "length" => 2,
-                        "type" => "string"
-                    ]
-                ]
-            ]
+            UserCreatedEvent::getEventName() => UserCreatedEvent::getDataContractDefinitions()
         ];
     }
 }

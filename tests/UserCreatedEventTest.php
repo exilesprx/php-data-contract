@@ -66,7 +66,7 @@ class UserCreatedEventTest extends TestCase
             $this->getTestData()
         );
 
-        $this->assertEquals(Arr::get($cache, 'props.country.default'), $event->getCountry());
+        $this->assertEquals(Arr::get($cache, 'properties.country.default'), $event->getCountry());
     }
 
     /** @test */

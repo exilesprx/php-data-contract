@@ -40,9 +40,14 @@ class DataContract
 
     private function makeRules($definition) : void
     {
-        $propertyRules = Arr::get($definition, 'props');
+        $propertyRules = Arr::get($definition, 'properties');
+        $required = Arr::get($definition, 'required');
 
         foreach ($propertyRules as $property => $ruleAttributes) {
+
+            if (in_array($property, $required)) {
+                $ruleAttributes['required'] = true;
+            }
 
             $this->rules->add(
                 $this->container->make($property, $ruleAttributes)
