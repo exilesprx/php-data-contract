@@ -15,7 +15,19 @@ class UserCreatedEventTest extends TestCase
     {
         $cache = Cache::get(UserCreatedEvent::getEventName());
 
-        $this->assertIsArray($cache);
+        $this->assertTrue(is_array($cache));
+
+        $this->assertArrayHasKey('properties', $cache);
+
+        $this->assertArrayHasKey('name', Arr::get($cache, 'properties'));
+
+        $this->assertArrayHasKey('email', Arr::get($cache, 'properties'));
+
+        $this->assertArrayHasKey('password', Arr::get($cache, 'properties'));
+
+        $this->assertArrayHasKey('country', Arr::get($cache, 'properties'));
+
+        $this->assertArrayHasKey('company', Arr::get($cache, 'properties'));
     }
 
     /** @test */

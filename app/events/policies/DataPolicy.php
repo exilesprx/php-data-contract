@@ -8,9 +8,9 @@ use PHPUnit\Framework\Assert;
 
 abstract class DataPolicy implements PolicyContract
 {
-    protected string $property;
+    protected $property;
 
-    protected array $rules;
+    protected $rules;
 
     public function __construct(string $property, array $rules)
     {

@@ -11,7 +11,7 @@ abstract class Event implements EventDataContract
 {
     use HasDataContract;
 
-    protected Collection $data;
+    protected $data;
 
     protected function __construct(array $data)
     {

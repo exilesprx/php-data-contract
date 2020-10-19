@@ -20,7 +20,7 @@ trait HasDataContract
     {
         $cache = Cache::get(self::getEventName());
 
-        Assert::assertIsArray($cache);
+        Assert::assertTrue(is_array($cache));
 
         return new DataContract($cache);
     }

@@ -13,6 +13,6 @@ class StringType extends DataPolicy
 
     protected function meetsType($data): void
     {
-        Assert::assertIsString($data, sprintf("%s must be of type %s", $this->property, self::getType()));
+        Assert::assertTrue(is_string($data), sprintf("%s must be of type %s", $this->property, self::getType()));
     }
 }

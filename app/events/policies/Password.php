@@ -13,6 +13,6 @@ class Password extends DataPolicy
 
     protected function meetsType($data): void
     {
-        Assert::assertMatchesRegularExpression(new \App\events\values\Password(), $data);
+        Assert::isTrue(preg_match(new \App\events\values\Password(), $data));
     }
 }

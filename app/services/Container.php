@@ -11,7 +11,7 @@ use Illuminate\Support\Collection;
 
 class Container
 {
-    protected Collection $bag;
+    protected $bag;
 
     public function __construct()
     {

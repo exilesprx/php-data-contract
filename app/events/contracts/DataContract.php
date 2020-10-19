@@ -9,9 +9,9 @@ use Illuminate\Support\Collection;
 
 class DataContract
 {
-    protected Container $container;
+    protected $container;
 
-    protected Collection $rules;
+    protected $rules;
 
     public function __construct(array $definition)
     {
@@ -49,7 +49,7 @@ class DataContract
                 $ruleAttributes['required'] = true;
             }
 
-            $this->rules->add(
+            $this->rules->push(
                 $this->container->make($property, $ruleAttributes)
             );
         }
