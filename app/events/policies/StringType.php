@@ -1,10 +1,10 @@
 <?php
 
-namespace App\events\contracts\types;
+namespace App\events\policies;
 
 use PHPUnit\Framework\Assert;
 
-class StringType extends DataType
+class StringType extends DataPolicy
 {
     public static function getType() : string
     {

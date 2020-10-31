@@ -1,12 +1,12 @@
 <?php
 
-namespace App\events\contracts\types;
+namespace App\events\policies;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use PHPUnit\Framework\Assert;
 
-abstract class DataType implements TypeContract
+abstract class DataPolicy implements PolicyContract
 {
     protected string $property;
 
@@ -18,7 +18,7 @@ abstract class DataType implements TypeContract
         $this->rules = $rules;
     }
 
-    public function assertValueConforms($data): void
+    public function assertPolicyIsValid($data): void
     {
         $isRequired = $this->isRequired();
         $default = $this->getDefault();

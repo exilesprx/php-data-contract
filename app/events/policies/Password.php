@@ -1,10 +1,10 @@
 <?php
 
-namespace App\events\contracts\types;
+namespace App\events\policies;
 
 use PHPUnit\Framework\Assert;
 
-class Password extends DataType
+class Password extends DataPolicy
 {
     public static function getType(): string
     {
@@ -13,6 +13,6 @@ class Password extends DataType
 
     protected function meetsType($data): void
     {
-        Assert::assertMatchesRegularExpression(new \App\Values\Password(), $data);
+        Assert::assertMatchesRegularExpression(new \App\events\values\Password(), $data);
     }
 }

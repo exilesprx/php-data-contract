@@ -2,10 +2,10 @@
 
 namespace App\services;
 
-use App\events\contracts\types\Email;
-use App\events\contracts\types\Password;
-use App\events\contracts\types\StringType;
-use App\events\contracts\types\TypeContract;
+use App\events\policies\Email;
+use App\events\policies\Password;
+use App\events\policies\StringType;
+use App\events\policies\PolicyContract;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
@@ -24,7 +24,7 @@ class Container
         );
     }
 
-    public function make(string $property, array $rules) : TypeContract
+    public function make(string $property, array $rules) : PolicyContract
     {
         $type = Arr::get($rules, 'type');
 

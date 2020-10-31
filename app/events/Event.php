@@ -31,7 +31,7 @@ abstract class Event implements EventDataContract
 
     public static function getDataContractDefinitions() : array
     {
-        $file = sprintf("%s%s%s.json", __DIR__, "/contracts/definitions/", Str::kebab(static::getEventName()));
+        $file = sprintf("%s%s%s.json", __DIR__, "/definitions/", Str::kebab(static::getEventName()));
 
         Assert::assertFileExists($file);
 

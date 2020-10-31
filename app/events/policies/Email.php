@@ -1,10 +1,10 @@
 <?php
 
-namespace App\events\contracts\types;
+namespace App\events\policies;
 
 use PHPUnit\Framework\Assert;
 
-class Email extends DataType
+class Email extends DataPolicy
 {
     public static function getType(): string
     {

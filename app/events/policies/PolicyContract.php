@@ -1,10 +1,10 @@
 <?php
 
-namespace App\events\contracts\types;
+namespace App\events\policies;
 
-interface TypeContract
+interface PolicyContract
 {
-    public function assertValueConforms($data) : void;
+    public function assertPolicyIsValid($data) : void;
     public function getPropertyName() : string;
     public function getDefault();
 
