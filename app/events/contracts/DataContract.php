@@ -2,7 +2,7 @@
 
 namespace App\events\contracts;
 
-use App\events\contracts\types\TypeContract;
+use App\events\policies\PolicyContract;
 use App\services\Container;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -26,10 +26,10 @@ class DataContract
     {
         $this->addDefaults($data);
 
-        $this->rules->each(function(TypeContract $type) use ($data) {
+        $this->rules->each(function(PolicyContract $type) use ($data) {
             $value = $data->get($type->getPropertyName());
 
-            $type->assertValueConforms($value);
+            $type->assertPolicyIsValid($value);
         });
     }
 
@@ -57,7 +57,7 @@ class DataContract
 
     private function addDefaults(Collection $data) : void
     {
-        $this->rules->each(function(TypeContract $type) use($data) {
+        $this->rules->each(function(PolicyContract $type) use($data) {
             $default = $type->getDefault();
 
             if (! $default) {
